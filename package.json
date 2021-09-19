@@ -8,8 +8,12 @@
   },
   "author": "Woomymy",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@types/node": "^16.9.2",
     "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "ts-postgres": "^1.1.3"
   }
 }
