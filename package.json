@@ -1,0 +1,15 @@
+{
+  "name": "skv",
+  "version": "1.0.0",
+  "description": "Simple key-value storage for PostGresSQL",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Woomymy",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.9.2",
+    "typescript": "^4.4.3"
+  }
+}
