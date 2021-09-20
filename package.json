@@ -2,9 +2,11 @@
   "name": "skv",
   "version": "1.0.0",
   "description": "Simple key-value storage for PostGresSQL",
-  "main": "dist/index.js",
+  "main": "dist/lib.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "tsc",
+    "start-build": "tsc && node dist/index.js"
   },
   "author": "Woomymy",
   "license": "MIT",

@@ -13,7 +13,6 @@
         "outDir": "dist",
         "moduleResolution": "node",
         "module": "esnext",
-        "esModuleInterop": true,
-        "resolveJsonModule": true
+        "esModuleInterop": true
     }
 }

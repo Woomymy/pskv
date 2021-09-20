@@ -1,14 +1,15 @@
-import { SkvConfig, SkvInitOptions } from "./typings";
+import { Skv } from "./lib.js";
 
-export { version as VERSION } from "../package.json";
-
-export class Skv {
-  options: SkvConfig;
-  constructor(options: SkvInitOptions) {
-    this.options = {
-      dbConfig: options.dbConfig,
-      tableName: options.tableName ?? "skv",
-      prefix: options.prefix ?? "skv",
-    };
-  }
+const client = new Skv({
+  dbConfig: {
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    host: "db",
+  },
+});
+try {
+  await client.connect();
+} catch (e) {
+  console.log(e);
 }
