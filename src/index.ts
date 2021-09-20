@@ -9,6 +9,7 @@ const client = new Skv({
   },
 });
 try {
+  // Initialise SKV
   await client.connect();
 } catch (e) {
   console.log(e);
