@@ -14,15 +14,3 @@ try {
 } catch (e) {
   console.log(e);
 }
-
-await client.set("hello", {
-  name: "Foo",
-  data: "bar",
-  hello: {
-    i: "o",
-  },
-});
-
-await client.set("name", "iof");
-
-await client.set("img", Buffer.from("io"));
