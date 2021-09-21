@@ -26,7 +26,7 @@ export class Skv {
   /**
    * Serializes a data before putting in the DB
    */
-  serialize(data: unknown): string {
+  private serialize(data: unknown): string {
     if (Buffer.isBuffer(data)) {
       return JSON.stringify(`${BASE64_PREFIX}${data.toString("base64")}`);
     } else {
@@ -36,7 +36,7 @@ export class Skv {
   /**
    * Deserializes data
    */
-  deserialize(json: string): unknown {
+  private deserialize(json: string): unknown {
     const raw = JSON.parse(json);
     if (new RegExp(`^${BASE64_PREFIX}`).test(raw)) {
       return Buffer.from(raw.substring(BASE64_PREFIX.length), "base64");
