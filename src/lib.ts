@@ -56,4 +56,13 @@ export class Skv {
       [key, serialized]
     );
   }
+  /**
+   * Clears a value
+   */
+  async clear(key: string): Promise<ResultIterator> {
+    return this.dbClient.query(
+      `DELETE FROM ${this.options.tableName} WHERE key = $1`,
+      [key]
+    );
+  }
 }
