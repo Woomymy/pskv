@@ -1,4 +1,4 @@
-import { Client } from "ts-postgres";
+import { Client, ResultIterator } from "ts-postgres";
 import { SkvConfig, SkvInitOptions } from "./typings";
 import { BASE64_PREFIX } from "./util.js";
 
@@ -18,7 +18,7 @@ export class Skv {
     await this.dbClient.connect();
     await this.dbClient.query(
       `CREATE TABLE IF NOT EXISTS ${this.options.tableName} (
-      key VARCHAR(255),
+      key VARCHAR(255) PRIMARY KEY NOT NULL,
       value TEXT
     )`
     );
@@ -43,5 +43,17 @@ export class Skv {
     } else {
       return raw;
     }
+  }
+
+  /**
+   * Set KEY = VALUE in the database
+   */
+  async set(key: string, value: unknown): Promise<ResultIterator> {
+    // Transform data into JSON
+    const serialized = this.serialize(value);
+    return this.dbClient.query(
+      `INSERT INTO ${this.options.tableName} (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2`,
+      [key, serialized]
+    );
   }
 }

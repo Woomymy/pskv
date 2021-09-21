@@ -15,12 +15,14 @@ try {
   console.log(e);
 }
 
-const dt = client.serialize(Buffer.from("io"));
-const _dt = client.serialize({ name: "Hello", var: { constant: "fun" } });
+await client.set("hello", {
+  name: "Foo",
+  data: "bar",
+  hello: {
+    i: "o",
+  },
+});
 
-console.log("===== BUFFER =====");
-console.log(dt);
-console.log(client.deserialize(dt));
-console.log("===== Object =====");
-console.log(_dt);
-console.log((client.deserialize(_dt) as any).name);
+await client.set("name", "iof");
+
+await client.set("img", Buffer.from("io"));
