@@ -57,9 +57,9 @@ export class Skv {
     );
   }
   /**
-   * Clears a value
+   * Deletes a value
    */
-  async clear(key: string): Promise<ResultIterator> {
+  async delete(key: string): Promise<ResultIterator> {
     return this.dbClient.query(
       `DELETE FROM ${this.options.tableName} WHERE key = $1`,
       [key]
