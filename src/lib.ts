@@ -38,7 +38,7 @@ export class Skv {
    */
   deserialize(json: string): unknown {
     const raw = JSON.parse(json);
-    if (new RegExp(`/^${BASE64_PREFIX}/`).test(raw)) {
+    if (new RegExp(`^${BASE64_PREFIX}`).test(raw)) {
       return Buffer.from(raw.substring(BASE64_PREFIX.length), "base64");
     } else {
       return raw;
