@@ -1,6 +1,6 @@
-import { createCipheriv } from "crypto";
 import { Client } from "ts-postgres";
 import { SkvConfig, SkvInitOptions } from "./typings";
+import { BASE64_PREFIX } from "./util.js";
 
 export class Skv {
   private options: SkvConfig;
@@ -28,7 +28,7 @@ export class Skv {
    */
   serialize(data: unknown): string {
     if (Buffer.isBuffer(data)) {
-      return JSON.stringify(`:b64:${data.toString("base64")}`);
+      return JSON.stringify(`${BASE64_PREFIX}${data.toString("base64")}`);
     } else {
       return JSON.stringify(data);
     }
@@ -38,9 +38,8 @@ export class Skv {
    */
   deserialize(json: string): unknown {
     const raw = JSON.parse(json);
-    if (/^:b64:/.test(raw)) {
-      console.log(raw);
-      return Buffer.from(raw.substring(5), "base64");
+    if (new RegExp(`/^${BASE64_PREFIX}/`).test(raw)) {
+      return Buffer.from(raw.substring(BASE64_PREFIX.length), "base64");
     } else {
       return raw;
     }
