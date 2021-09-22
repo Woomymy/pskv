@@ -1,17 +1,16 @@
-import { Client, ResultIterator } from "ts-postgres";
 import { SkvConfig, SkvInitOptions } from "./typings";
 import { BASE64_PREFIX } from "./util.js";
-
+import pg from "pg";
 export class Skv {
   private options: SkvConfig;
-  private dbClient: Client;
+  private dbClient: pg.Client;
   constructor(options: SkvInitOptions) {
     this.options = {
       dbConfig: options.dbConfig,
       tableName: options.tableName ?? "skv",
       prefix: options.prefix ?? "skv",
     };
-    this.dbClient = new Client(this.options.dbConfig);
+    this.dbClient = new pg.Client(this.options.dbConfig);
   }
 
   async connect() {
@@ -48,7 +47,7 @@ export class Skv {
   /**
    * Set KEY = VALUE in the database
    */
-  async set(key: string, value: unknown): Promise<ResultIterator> {
+  async set(key: string, value: unknown) {
     // Transform data into JSON
     const serialized = this.serialize(value);
     return this.dbClient.query(
@@ -59,7 +58,7 @@ export class Skv {
   /**
    * Deletes a value
    */
-  async delete(key: string): Promise<ResultIterator> {
+  async delete(key: string) {
     return this.dbClient.query(
       `DELETE FROM ${this.options.tableName} WHERE key = $1`,
       [key]
@@ -68,7 +67,7 @@ export class Skv {
   /**
    * Clears the database
    */
-  async clear(): Promise<ResultIterator> {
+  async clear() {
     return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
   }
 }
