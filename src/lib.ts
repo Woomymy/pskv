@@ -50,7 +50,7 @@ export class Skv {
   async get<T>(key: string): Promise<T | null> {
     const iter = await this.dbClient.query(
       `SELECT value FROM ${this.options.tableName} WHERE key = $1`,
-      [key]
+      [`${this.options.prefix}:${key}`]
     );
     if (iter.rows[0]) {
       return this.deserialize(iter.rows[0].value) as unknown as T;
@@ -65,7 +65,7 @@ export class Skv {
     const serialized = this.serialize(value);
     return this.dbClient.query(
       `INSERT INTO ${this.options.tableName} (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2`,
-      [key, serialized]
+      [`${this.options.prefix}:${key}`, serialized]
     );
   }
   /**
@@ -80,7 +80,7 @@ export class Skv {
   async delete(key: string) {
     return this.dbClient.query(
       `DELETE FROM ${this.options.tableName} WHERE key = $1`,
-      [key]
+      [`${this.options.prefix}:${key}`]
     );
   }
   /**
