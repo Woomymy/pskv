@@ -19,7 +19,7 @@ export class Skv {
       `CREATE TABLE IF NOT EXISTS ${this.options.tableName} (
       key VARCHAR(255) PRIMARY KEY NOT NULL,
       value TEXT
-    )`
+      )`
     );
   }
   /**
