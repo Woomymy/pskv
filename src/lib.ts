@@ -69,6 +69,12 @@ export class Skv {
     );
   }
   /**
+   * Check if DB contains key
+   */
+  async has(key: string): Promise<boolean> {
+    return !((await this.get(key)) == null);
+  }
+  /**
    * Deletes a value
    */
   async delete(key: string) {
