@@ -1,4 +1,4 @@
-import { BASE64_PREFIX } from "./constants.js";
+export const BASE64_PREFIX = ":base64:";
 /**
  * Serializes a data before putting in the DB
  */
