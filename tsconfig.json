@@ -9,6 +9,7 @@
     "compilerOptions": {
         "allowJs": false,
         "target": "esnext",
+        "skipLibCheck": true,
         "declaration": true,
         "outDir": "dist",
         "moduleResolution": "node",
