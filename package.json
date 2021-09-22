@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "tsc",
-    "start-build": "tsc && node dist/index.js"
+    "start-build": "tsc && node dist/index.js",
+    "build": "tsc"
   },
   "author": "Woomymy",
   "license": "MIT",
