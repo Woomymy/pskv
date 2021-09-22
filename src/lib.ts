@@ -45,6 +45,19 @@ export class Skv {
   }
 
   /**
+   * Gets a value
+   */
+  async get<T>(key: string): Promise<T | null> {
+    const iter = await this.dbClient.query(
+      `SELECT value FROM ${this.options.tableName} WHERE key = $1`,
+      [key]
+    );
+    if (iter.rows[0]) {
+      return this.deserialize(iter.rows[0].value) as unknown as T;
+    }
+    return null;
+  }
+  /**
    * Set KEY = VALUE in the database
    */
   async set(key: string, value: unknown) {
