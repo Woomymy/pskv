@@ -4,7 +4,7 @@
     "description": "Simple key-value storage for PostGresSQL",
     "main": "dist/lib.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest --passWithNoTests",
         "prepublishOnly": "tsc",
         "start-build": "tsc && node dist/index.js",
         "build": "tsc",
@@ -16,14 +16,17 @@
     "license": "MIT",
     "type": "module",
     "devDependencies": {
+        "@types/jest": "^27.0.2",
         "@types/node": "^16.9.2",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "prettier": "^2.4.1",
-        "typescript": "^4.4.3",
         "@types/pg": "^8.6.1",
         "@typescript-eslint/eslint-plugin": "^4.31.2",
-        "@typescript-eslint/parser": "^4.31.2"
+        "@typescript-eslint/parser": "^4.31.2",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^27.2.1",
+        "prettier": "^2.4.1",
+        "ts-jest": "^27.0.5",
+        "typescript": "^4.4.3"
     },
     "dependencies": {
         "eslint": "^7.32.0",
