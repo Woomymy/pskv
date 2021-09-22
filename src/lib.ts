@@ -13,9 +13,9 @@ export class Skv {
         this.dbClient = new pg.Client(this.options.dbConfig);
     }
 
-    async connect() {
+    async connect(): Promise<pg.QueryResult<unknown>> {
         await this.dbClient.connect();
-        await this.dbClient.query(
+        return await this.dbClient.query(
             `CREATE TABLE IF NOT EXISTS ${this.options.tableName} (
       key VARCHAR(255) PRIMARY KEY NOT NULL,
       value TEXT
@@ -60,7 +60,7 @@ export class Skv {
     /**
      * Set KEY = VALUE in the database
      */
-    async set(key: string, value: unknown) {
+    async set(key: string, value: unknown): Promise<pg.QueryResult<unknown>> {
         // Transform data into JSON
         const serialized = this.serialize(value);
         return this.dbClient.query(
@@ -77,7 +77,7 @@ export class Skv {
     /**
      * Deletes a value
      */
-    async delete(key: string) {
+    async delete(key: string): Promise<pg.QueryResult<unknown>> {
         return this.dbClient.query(
             `DELETE FROM ${this.options.tableName} WHERE key = $1`,
             [`${this.options.prefix}:${key}`]
@@ -86,7 +86,7 @@ export class Skv {
     /**
      * Clears the database
      */
-    async clear() {
+    async clear(): Promise<pg.QueryResult<unknown>> {
         return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
     }
 }
