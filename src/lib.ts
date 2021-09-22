@@ -65,4 +65,10 @@ export class Skv {
       [key]
     );
   }
+  /**
+   * Clears the database
+   */
+  async clear(): Promise<ResultIterator> {
+    return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
+  }
 }
