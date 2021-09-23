@@ -11,13 +11,8 @@ jobs:
     # Compile with TSC
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm install
+      - name: Setup env
+        uses: ".github/workflows/common-node"
       - name: Build
         run: npm run build
   lint:

@@ -1,0 +1,14 @@
+name: "Install dependencies"
+description: "Installs dependencies and setups Node.JS"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - name: Install dependencies
+      run: npm install
+      shell: "bash"
