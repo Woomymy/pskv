@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup env
-        uses: ".github/workflows/common-node"
+        uses: "./.github/workflows/common-node"
       - name: Build
         run: npm run build
   lint:
