@@ -7,30 +7,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-  compile:
-    # Compile with TSC
+  ubuntu:
+    strategy:
+      matrix:
+        action: [build, lint, test]
     runs-on: ubuntu-latest
+    name: Run ${{ matrix.action.name }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup env
         uses: ./.github/workflows/common-node
       - name: Build
-        run: npm run build
-  lint:
-    # Lint with ESLint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup env
-        uses: ./.github/workflows/common-node
-      - name: Run eslint
-        run: npm run lint
-  unittest:
-    # Run unit tests with jest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup env
-        uses: ./.github/workflows/common-node
-      - name: Test
-        run: npm test
+        run: npm run ${{ matrix.action.name }}
