@@ -4,7 +4,6 @@ description: "Installs dependencies and setups Node.JS"
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
