@@ -1,4 +1,4 @@
-import { SkvConfig, SkvInitOptions } from "./typings";
+import type { SkvConfig, SkvInitOptions } from "./typings";
 import pg from "pg";
 import { serialize, deserialize } from "./util/serialize.js";
 export class Skv {
@@ -27,10 +27,10 @@ export class Skv {
     }
 
     /**
-     * Gets a value from DataBase
+     * Gets a value from Store
      * @typeParam T Type of the returned value
      * @param key {string} - Name of the key to get
-     * @returns {T | null} - The result in database
+     * @returns {T | null} - The result of Query
      */
     async get<T>(key: string): Promise<T | null> {
         const iter = await this.dbClient.query(
@@ -43,7 +43,10 @@ export class Skv {
         return null;
     }
     /**
-     * Set KEY = VALUE in the database
+     * Set value in Store
+     * @param key {string} - Key
+     * @param value {unknown} - Value (MUST be serialisable by JSON.stringify or be a Buffer)
+     * @returns {Promise<pg.QueryResult<unknown>>} - Result of the query
      */
     async set(key: string, value: unknown): Promise<pg.QueryResult<unknown>> {
         // Transform data into JSON
@@ -54,13 +57,17 @@ export class Skv {
         );
     }
     /**
-     * Check if DB contains key
+     * Check if Store contains key
+     * @param key {string} - Key to check
+     * @returns {Promise<boolean>}
      */
     async has(key: string): Promise<boolean> {
         return !((await this.get(key)) == null);
     }
     /**
-     * Deletes a value
+     * Deletes a Store in table
+     * @param key {string} - Key to delete
+     * @returns {Promise<pg.QueryResult<unknown>>}
      */
     async delete(key: string): Promise<pg.QueryResult<unknown>> {
         return this.dbClient.query(
@@ -69,9 +76,12 @@ export class Skv {
         );
     }
     /**
-     * Clears the database
+     * Clears the Store
+     * **WARNING** This is dangerous
+     * @returns {Promise<pg.QueryResult<unknown>>}
      */
     async clear(): Promise<pg.QueryResult<unknown>> {
         return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
     }
 }
+export type { SkvInitOptions };
