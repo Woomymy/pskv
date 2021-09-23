@@ -12,10 +12,10 @@ jobs:
       matrix:
         action: [build, lint, test]
     runs-on: ubuntu-latest
-    name: Run ${{ matrix.action.name }}
+    name: Run ${{ matrix.action }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup env
         uses: ./.github/workflows/common-node
       - name: Build
-        run: npm run ${{ matrix.action.name }}
+        run: npm run ${{ matrix.action }}
