@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Iosevka";
+    src: url(./font.ttf);
+}
+
+code {
+    font-family: "Iosevka", sans-serif;
+}

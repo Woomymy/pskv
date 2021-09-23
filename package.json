@@ -11,7 +11,7 @@
         "lint": "eslint . -c .eslintrc.cjs",
         "lint-fix": "eslint . -c .eslintrc.cjs --fix",
         "format": "prettier 'src/**/*.ts' --write",
-        "gendocs": "typedoc src/lib.ts"
+        "gendocs": "typedoc && cp doc/font.ttf docs/assets/font.ttf"
     },
     "author": "Woomymy",
     "license": "MIT",
