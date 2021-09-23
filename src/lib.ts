@@ -12,7 +12,10 @@ export class Skv {
         };
         this.dbClient = new pg.Client(this.options.dbConfig);
     }
-
+    /**
+     * Connects client to DB and performs table creation if needed
+     * @returns {Promise<pg.QueryResult<unknown>>} - The result of table creation
+     */
     async connect(): Promise<pg.QueryResult<unknown>> {
         await this.dbClient.connect();
         return await this.dbClient.query(
@@ -24,7 +27,10 @@ export class Skv {
     }
 
     /**
-     * Gets a value
+     * Gets a value from DataBase
+     * @typeParam T Type of the returned value
+     * @param key {string} - Name of the key to get
+     * @returns {T | null} - The result in database
      */
     async get<T>(key: string): Promise<T | null> {
         const iter = await this.dbClient.query(
