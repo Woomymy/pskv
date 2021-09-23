@@ -1,3 +1,4 @@
+---
 name: "Install dependencies"
 description: "Installs dependencies and setups Node.JS"
 
