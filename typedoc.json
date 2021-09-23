@@ -1,1 +1,9 @@
-{}
+{
+    "entryPoints": ["./src/lib.ts"],
+    "excludePrivate": true,
+    "darkHighlightTheme": "dracula",
+    "lightHighlightTheme": "dracula",
+    "name": "Skv documentation",
+    "githubPages": true,
+    "customCss": "./doc/docs.css"
+}
