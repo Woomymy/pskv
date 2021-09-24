@@ -7,13 +7,13 @@
         "dist/"
     ],
     "compilerOptions": {
-        "allowJs": false,
+        "allowJs": true,
         "target": "esnext",
         "skipLibCheck": true,
+        "moduleResolution": "node",
         "declaration": true,
         "outDir": "dist",
-        "moduleResolution": "node",
-        "module": "esnext",
+        "module": "ES6",
         "esModuleInterop": true
     }
 }
