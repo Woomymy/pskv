@@ -1,0 +1,20 @@
+version: "3.9"
+networks:
+    skv_test:
+        external: false
+
+services:
+    database:
+        image: "postgres:13.3"
+        env_file: "test.env"
+        ports:
+            - "6532:6532"
+        networks:
+            - "skv_test"
+    skv_test:
+        env_file: "test.env"
+        networks:
+            - "skv_test"
+        build:
+            context: ".."
+            dockerfile: "./docker/Dockerfile.test"
