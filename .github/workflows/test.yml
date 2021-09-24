@@ -20,6 +20,7 @@ jobs:
         run: npm ci
         shell: "bash"
   ubuntu:
+    needs: ["deps"]
     strategy:
       matrix:
         action: [build, lint, test]
