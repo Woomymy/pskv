@@ -1,12 +1,12 @@
-# Skv
+# Pskv
 
-Skv is an interface for key-value storage for PostgreSQL.
+Pskv is an interface for key-value storage for PostgreSQL.
 
 ## Examples
 
 ```typescript
-import { Skv } from "skv";
-const client = new Skv({
+import { Pskv } from "skv";
+const client = new Pskv({
     dbConfig: {
         user: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
@@ -49,7 +49,7 @@ docker-compose -f docker/docker-compose.test.yml up --abort-on-container-exit
 
 ## License
 
-Skv is licensed under the terms of the [MIT](https://opensource.org/licenses/MIT) License.
+Pskv is licensed under the terms of the [MIT](https://opensource.org/licenses/MIT) License.
 
 [Full text of the license](/LICENSE)
 
