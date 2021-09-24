@@ -83,5 +83,11 @@ export class Skv {
     async clear(): Promise<pg.QueryResult<unknown>> {
         return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
     }
+    /**
+     * Ends DB connection
+     */
+    async end(): Promise<void> {
+        await this.dbClient.end();
+    }
 }
 export type { SkvInitOptions };
