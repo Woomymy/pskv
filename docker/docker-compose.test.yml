@@ -7,8 +7,6 @@ services:
     database:
         image: "postgres:13.3"
         env_file: "test.env"
-        ports:
-            - "6532:6532"
         networks:
             - "skv_test"
     skv_test:
