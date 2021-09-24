@@ -1,0 +1,8 @@
+FROM node:16-alpine3.14
+WORKDIR /usr/src/skv
+COPY package*.json ./
+COPY ./src ./
+COPY ./tsconfig.json ./
+COPY ./jest.config.js ./
+RUN npm install
+CMD npm run test
