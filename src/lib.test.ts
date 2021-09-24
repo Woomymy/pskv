@@ -1,4 +1,4 @@
-import { Skv } from "./lib.js";
+import { Pskv } from "./lib.js";
 
 describe("Database tests", () => {
     if (!process.env.DB_HOST)
@@ -9,7 +9,7 @@ describe("Database tests", () => {
     afterAll(async () => {
         await client.end();
     });
-    const client = new Skv({
+    const client = new Pskv({
         dbConfig: {
             host: process.env.DB_HOST,
             password: process.env.POSTGRES_PASSWORD,

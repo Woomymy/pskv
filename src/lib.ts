@@ -1,14 +1,14 @@
-import type { SkvConfig, SkvInitOptions } from "./typings";
+import type { PskvConfig, PskvInitOptions } from "./typings";
 import pg from "pg";
 import { serialize, deserialize } from "./util/serialize.js";
-export class Skv {
-    private options: SkvConfig;
+export class Pskv {
+    private options: PskvConfig;
     private dbClient: pg.Client;
-    constructor(options: SkvInitOptions) {
+    constructor(options: PskvInitOptions) {
         this.options = {
             dbConfig: options.dbConfig,
-            tableName: options.tableName ?? "skv",
-            prefix: options.prefix ?? "skv"
+            tableName: options.tableName ?? "pskv",
+            prefix: options.prefix ?? "pskv"
         };
         this.dbClient = new pg.Client(this.options.dbConfig);
     }
@@ -90,4 +90,4 @@ export class Skv {
         await this.dbClient.end();
     }
 }
-export type { SkvInitOptions };
+export type { PskvInitOptions };
