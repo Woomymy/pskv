@@ -3,6 +3,7 @@
     "version": "1.0.1",
     "description": "Simple key-value storage for PostGresSQL",
     "main": "dist/lib.js",
+    "types": "dist/lib.d.ts",
     "scripts": {
         "test": "jest --passWithNoTests",
         "prepublishOnly": "tsc",
