@@ -1,4 +1,4 @@
-import type { PskvConfig, PskvInitOptions } from "./typings";
+import type { PskvConfig, PskvInitOptions } from "./typings/index.js";
 import pg from "pg";
 import { serialize, deserialize } from "./util/serialize.js";
 export class Pskv {
