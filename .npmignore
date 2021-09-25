@@ -3,3 +3,9 @@ src
 .env
 doc
 docs
+tsconfig.json
+typedoc.json
+.prettier*
+.eslint*
+.github
+docker
