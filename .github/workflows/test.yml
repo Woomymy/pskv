@@ -61,3 +61,4 @@ jobs:
           POSTGRES_DB: skv-test
           POSTGRES_USER: skv-test
           POSTGRES_PASSWORD: skv-test
+          DB_HOST: localhost
