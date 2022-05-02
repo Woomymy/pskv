@@ -1,8 +1,8 @@
-import pg from "pg";
+import { Configuration } from "ts-postgres";
 
 export interface PskvInitOptions {
     prefix?: string;
-    dbConfig: pg.ClientConfig;
+    dbConfig: Configuration;
     tableName?: string;
 }
 
