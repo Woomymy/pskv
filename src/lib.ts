@@ -1,28 +1,28 @@
 import type { PskvConfig, PskvInitOptions } from "./typings/index.js";
-import pg from "pg";
+import { Client, ResultIterator } from "ts-postgres";
 import { serialize, deserialize } from "./util/serialize.js";
 export class Pskv {
     private options: PskvConfig;
-    private dbClient: pg.Client;
+    private dbClient: Client;
     constructor(options: PskvInitOptions) {
         this.options = {
             dbConfig: options.dbConfig,
             tableName: options.tableName ?? "pskv",
             prefix: options.prefix ?? "pskv"
         };
-        this.dbClient = new pg.Client(this.options.dbConfig);
+        this.dbClient = new Client(this.options.dbConfig);
     }
     /**
      * Connects client to DB and performs table creation if needed
-     * @returns {Promise<pg.QueryResult<unknown>>} - The result of table creation
+     * @returns {Promise<ResultIterator>>} - The result of table creation
      */
-    async connect(): Promise<pg.QueryResult<unknown>> {
+    async connect(): Promise<ResultIterator> {
         await this.dbClient.connect();
         return await this.dbClient.query(
             `CREATE TABLE IF NOT EXISTS ${this.options.tableName} (
-      key VARCHAR(255) PRIMARY KEY NOT NULL,
-      value TEXT
-      )`
+                key VARCHAR(255) PRIMARY KEY NOT NULL,
+                value TEXT
+            )`
         );
     }
 
@@ -38,7 +38,7 @@ export class Pskv {
             [`${this.options.prefix}:${key}`]
         );
         if (iter.rows[0]) {
-            return deserialize(iter.rows[0].value) as unknown as T;
+            return deserialize(iter.rows[0][0] as string) as unknown as T;
         }
         return null;
     }
@@ -46,9 +46,9 @@ export class Pskv {
      * Set value in Store
      * @param key {string} - Key
      * @param value {unknown} - Value (MUST be serialisable by JSON.stringify or be a Buffer)
-     * @returns {Promise<pg.QueryResult<unknown>>} - Result of the query
+     * @returns {Promise<ResultIterator>} - Result of the query
      */
-    async set(key: string, value: unknown): Promise<pg.QueryResult<unknown>> {
+    async set(key: string, value: unknown): Promise<ResultIterator> {
         // Transform data into JSON
         const serialized = serialize(value);
         return this.dbClient.query(
@@ -67,9 +67,9 @@ export class Pskv {
     /**
      * Deletes a Store in table
      * @param key {string} - Key to delete
-     * @returns {Promise<pg.QueryResult<unknown>>}
+     * @returns {Promise<ResultIterator>}
      */
-    async delete(key: string): Promise<pg.QueryResult<unknown>> {
+    async delete(key: string): Promise<ResultIterator> {
         return this.dbClient.query(
             `DELETE FROM ${this.options.tableName} WHERE key = $1`,
             [`${this.options.prefix}:${key}`]
@@ -78,9 +78,9 @@ export class Pskv {
     /**
      * Clears the Store
      * **WARNING** This is dangerous
-     * @returns {Promise<pg.QueryResult<unknown>>}
+     * @returns {Promise<ResultIterator>}
      */
-    async clear(): Promise<pg.QueryResult<unknown>> {
+    async clear(): Promise<ResultIterator> {
         return this.dbClient.query(`TRUNCATE TABLE ${this.options.tableName}`);
     }
     /**
