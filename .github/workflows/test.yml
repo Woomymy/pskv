@@ -43,6 +43,7 @@ jobs:
           POSTGRES_PASSWORD: skv-test
           POSTGRES_USER: skv-test
           POSTGRES_DB: skv-test
+          DB_HOST: localhost
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
