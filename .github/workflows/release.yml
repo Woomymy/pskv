@@ -73,7 +73,7 @@ jobs:
         with:
           dir: docs/
           branch: gh-pages
-          token: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Gen changelog
         run: bash .github/bin/genlog.sh
       - id: tag
