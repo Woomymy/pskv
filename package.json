@@ -12,7 +12,7 @@
         "lint": "eslint . -c .eslintrc.cjs",
         "lint-fix": "eslint . -c .eslintrc.cjs --fix",
         "format": "prettier 'src/**/*.ts' --write",
-        "gendocs": "typedoc && cp doc/font.ttf docs/assets/font.ttf && echo \"pskv.woomy.ovh\" > docs/CNAME"
+        "gendocs": "typedoc && cp doc/font.ttf docs/assets/font.ttf && echo \"pskv.woomy.be\" > docs/CNAME"
     },
     "author": "Woomymy",
     "license": "MIT",
