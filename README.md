@@ -41,10 +41,10 @@ await client.has("name2");
 
 To run test suite (with jest):
 
-### With docker-compose
+### With docker compose
 
 ```docker
-docker-compose -f docker/docker-compose.test.yml up --abort-on-container-exit
+docker compose -f docker/docker-compose.test.yml up --abort-on-container-exit
 ```
 
 ## License
